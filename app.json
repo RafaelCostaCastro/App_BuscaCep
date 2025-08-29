@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "projeto_aula_02",
-    "slug": "projeto_aula_02",
+    "name": "app_busca_cep",
+    "slug": "app-busca-cep",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
