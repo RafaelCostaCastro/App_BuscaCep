@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { TextInput, Divider, Text, Button } from 'react-native-paper';
 
 const logoLocal = require('./assets/house.png');
@@ -41,13 +41,16 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Cabeçalho com logo e título */}
-      <View style={styles.header}>
-        <Image source={logoLocal} style={styles.logo} />
+    <View style={{ flex: 1, padding: 20, paddingTop: 60, backgroundColor: '#fff' }}>
+      {/* Cabeçalho com ícone da casa e título */}
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 30 }}>
+        <Image
+          source={logoLocal}
+          style={{ width: 40, height: 40, marginRight: 12, resizeMode: 'contain' }}
+        />
         <Text
           variant="headlineMedium"
-          style={styles.title}
+          style={{ color: 'purple', fontWeight: 'bold', textAlign: 'center', maxWidth: '80%' }}
           numberOfLines={2}
           ellipsizeMode="tail"
         >
@@ -62,56 +65,58 @@ export default function App() {
         value={cep}
         onChangeText={setCep}
         maxLength={8}
-        style={styles.input}
         mode="outlined"
+        style={{ marginBottom: 12, height: 40 }}
       />
       <Button
         mode="contained"
         onPress={() => buscaCep(cep)}
-        style={styles.button}
+        buttonColor="purple"
+        style={{ marginBottom: 12 }}
       >
         Buscar CEP
       </Button>
-      {erro ? <Text style={styles.error}>{erro}</Text> : null}
+      {erro ? <Text style={{ color: 'red', marginBottom: 12 }}>{erro}</Text> : null}
 
       {dadosCep && (
-        <View style={styles.resultContainer}>
+        <View style={{ marginTop: 20, backgroundColor: 'white', padding: 16, borderRadius: 8 }}>
           <TextInput
             label="Rua"
             value={dadosCep.logradouro || ''}
             editable={false}
-            style={styles.resultInput}
             mode="outlined"
+            style={{ marginBottom: 10, height: 40 }}
           />
-          <Divider style={styles.divider} />
+          <Divider style={{ backgroundColor: 'gray', marginVertical: 4 }} />
           <TextInput
             label="Bairro"
             value={dadosCep.bairro || ''}
             editable={false}
-            style={styles.resultInput}
             mode="outlined"
+            style={{ marginBottom: 10, height: 40 }}
           />
-          <Divider style={styles.divider} />
+          <Divider style={{ backgroundColor: 'gray', marginVertical: 4 }} />
           <TextInput
             label="Cidade"
             value={dadosCep.localidade || ''}
             editable={false}
-            style={styles.resultInput}
             mode="outlined"
+            style={{ marginBottom: 10, height: 40 }}
           />
-          <Divider style={styles.divider} />
+          <Divider style={{ backgroundColor: 'gray', marginVertical: 4 }} />
           <TextInput
             label="Estado"
             value={dadosCep.uf || ''}
             editable={false}
-            style={styles.resultInput}
             mode="outlined"
+            style={{ marginBottom: 10, height: 40 }}
           />
-          <Divider style={styles.divider} />
+          <Divider style={{ backgroundColor: 'gray', marginVertical: 4 }} />
           <Button
             mode="contained"
             onPress={limparCampos}
-            style={styles.limparButton}
+            buttonColor="red"
+            style={{ marginTop: 12 }}
           >
             Limpar
           </Button>
@@ -120,58 +125,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff', 
-    padding: 20,
-    paddingTop: 60,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  logo: {
-    width: 40,
-    height: 40,
-    marginRight: 12,
-    resizeMode: 'contain',
-  },
-  title: {
-    color: 'purple',
-    fontWeight: 'bold',
-    flexShrink: 1,
-    maxWidth: '80%',
-  },
-  input: {
-    marginBottom: 12,
-    height: 40,
-  },
-  button: {
-    marginBottom: 12,
-    backgroundColor: 'purple',
-  },
-  error: {
-    color: 'red',
-    marginBottom: 12,
-  },
-  resultContainer: {
-    marginTop: 20,
-    backgroundColor: 'white',
-    padding: 16,
-    borderRadius: 8,
-  },
-  resultInput: {
-    marginBottom: 10,
-    height: 40,
-  },
-  divider: {
-    backgroundColor: 'gray',
-  },
-  limparButton: {
-    marginTop: 12,
-    backgroundColor: 'red',
-  },
-});
